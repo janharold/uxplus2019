@@ -1,0 +1,193 @@
+colors = {
+  red-default      :  hsl(19, 65, 53),
+  red-pale         :  hsl(19, 100, 86),
+  blue-default     :  hsl(212, 63, 42),
+  blue-highlight   :  hsl(212, 69, 55),
+  blue-pale        :  hsl(212, 38, 80),
+  uxyellow         :  hsl(53, 92, 52),
+  uxwhite          :  hsl(0, 0, 100),
+  uxblack          :  hsl(252, 8, 15)
+}
+
+spaces = {
+  xxsmall : 4px,
+  xsmall  : 8px,
+  small   : 12px,
+  normal  : 16px,
+  medium  : 24px,
+  large   : 32px,
+  xlarge  : 48px,
+  xxlarge : 60px
+}
+
+radius = {
+  default  : 12px
+}
+
+containers = {
+  mobile-max   : 720px,
+  tablet-max   : 800px,
+  desktop-max  : 960px,
+  wide-support : 1600px
+}
+
+displays = {
+  none          : none,
+  flex          : flex,
+  inlineBlock   : inline-block,
+  block         : block
+}
+
+flex-props = {
+  start   : flex-start,
+  end     : flex-end,
+  center  : center
+}
+
+fonts = {
+  regular : 'MGBook',
+  bold    : 'MGBold',
+  black   : 'MGBlack'
+}
+
+
+@font-face
+  font-family 'MGBook'
+  src url('../fonts/menagrotesk-book-webfont.woff2') format('woff2'),
+      url('../fonts/menagrotesk-book-webfont.woff') format('woff')
+  font-weight normal
+  font-style normal
+
+@font-face
+  font-family 'MGBold'
+  src url('../fonts/menagrotesk-bold-webfont.woff2') format('woff2'),
+      url('../fonts/menagrotesk-bold-webfont.woff') format('woff')
+  font-weight normal
+  font-style normal
+
+@font-face 
+  font-family 'MGBlack'
+  src url('../fonts/menagrotesk-black-webfont.woff2') format('woff2'),
+      url('../fonts/menagrotesk-black-webfont.woff') format('woff')
+  font-weight normal
+  font-style normal
+
+// Functions
+forTablet()
+  @media (min-width: containers[mobile-max])  
+    {block}
+    
+forDesktop()
+  @media (min-width: containers[tablet-max])  
+    {block}
+      
+createUtilityClasses(targetHash, className, property)
+  for key, value in targetHash
+    .{className}-{key}
+      {property} value
+
+
+// Resets & Foundation
+html, body
+  
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+  
+  color colors[uxblack];
+  font-family 'MGBook', Helvetica, sans-serif
+  letter-spacing 0.02em
+  margin 0
+  padding 0
+  
+a
+  transition all 325ms
+
+  
+// Typography
+
+
+
+
+// Containers
+.boundary
+  margin 0 auto
+  max-width containers[mobile-max];
+  
+  +forTablet()
+    max-width containers[tablet-max];
+    
+  +forDesktop()
+    max-width containers[desktop-max];
+
+
+// Navigation
+.navigation
+  background-color colors[uxblack];
+  padding spaces[normal];
+
+  .uxplusLogo img
+    max-width 100px
+
+  nav
+    display flex
+    align-items center
+    flex 1
+    font-family fonts[bold];
+    
+    a:not(.button)
+      display none
+      @media (min-width: containers[mobile-max])
+        display inline-block
+  
+  a.link
+    margin-left spaces[xlarge];
+    color colors[uxwhite];
+    text-decoration none
+    &:hover 
+      color colors[red-default];
+
+  .button 
+    margin-left auto
+
+// Buttons
+.button
+  background-color colors[blue-default];
+  border-radius radius[default];
+  color colors[uxwhite];
+  padding-top spaces[small];
+  padding-bottom spaces[small];
+  padding-left spaces[normal];
+  padding-right spaces[normal];
+  text-decoration none
+  
+  &:hover 
+    background-color colors[blue-highlight];
+
+// UTILITIES
+
+// - Colors
+createUtilityClasses(colors, fontColor, color)
+
+// - Box Properties
+createUtilityClasses(displays, display, display)
+createUtilityClasses(flex-props, justifyContent, justify-content)
+createUtilityClasses(flex-props, alignItems, align-items)
+
+// - Padding
+createUtilityClasses(spaces, padding, padding)
+createUtilityClasses(spaces, paddingTop, padding-top)
+createUtilityClasses(spaces, paddingRight, padding-right)
+createUtilityClasses(spaces, paddingBottom, padding-bottom)
+createUtilityClasses(spaces, paddingLeft, padding-left)
+
+// - Margin
+createUtilityClasses(spaces, margin, margin)
+createUtilityClasses(spaces, marginTop, margin-top)
+createUtilityClasses(spaces, marginRight, margin-right)
+createUtilityClasses(spaces, marginBottom, margin-bottom)
+createUtilityClasses(spaces, marginLeft, margin-left)
+
