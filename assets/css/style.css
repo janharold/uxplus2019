@@ -129,6 +129,9 @@ strong {
   background-position: right bottom;
   min-height: 90vh;
   text-align: center;
+  -webkit-transition: background-size 450ms;
+  -o-transition: background-size 450ms;
+  transition: background-size 450ms;
   padding-left: 32px;
   padding-right: 32px;
   padding-top: 60px;
