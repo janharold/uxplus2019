@@ -26,14 +26,22 @@ body {
   -moz-osx-font-smoothing: grayscale;
   color: #242329;
   font-family: 'MGBook', Helvetica, sans-serif;
+  font-size: 18px;
   letter-spacing: 0.02em;
   margin: 0;
   padding: 0;
 }
 a {
-  -webkit-transition: all 325ms;
-  -o-transition: all 325ms;
-  transition: all 325ms;
+  -webkit-transition: all 450ms;
+  -o-transition: all 450ms;
+  transition: all 450ms;
+}
+strong {
+  font-family: 'MGBold', Helvetica, sans-serif;
+}
+* {
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
 }
 .boundary {
   margin: 0 auto;
@@ -54,7 +62,8 @@ a {
   padding: 16px;
 }
 .navigation .uxplusLogo img {
-  max-width: 100px;
+  max-width: 110px;
+  vertical-align: middle;
 }
 .navigation nav {
   display: -webkit-box;
@@ -91,6 +100,7 @@ a {
   background-color: #2867af;
   border-radius: 12px;
   color: #fff;
+  font-family: 'MGBold';
   padding-top: 12px;
   padding-bottom: 12px;
   padding-left: 16px;
@@ -99,6 +109,65 @@ a {
 }
 .button:hover {
   background-color: #3d87db;
+}
+.button.--medium {
+  padding-top: 16px;
+  padding-bottom: 16px;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+.button.--large {
+  font-size: 1.2em;
+  padding-top: 24px;
+  padding-bottom: 24px;
+  padding-left: 32px;
+  padding-right: 32px;
+}
+.uxplusIntro {
+  background: no-repeat url("../images/bg-intro-right.svg");
+  background-size: 60%;
+  background-position: right bottom;
+  min-height: 90vh;
+  text-align: center;
+  padding-left: 32px;
+  padding-right: 32px;
+  padding-top: 60px;
+  padding-bottom: 60px;
+  width: 100%;
+}
+@media (min-width: 720px) {
+  .uxplusIntro {
+    background: no-repeat url("../images/bg-intro-right.svg") right bottom, no-repeat url("../images/bg-intro-left.svg") left bottom;
+    background-size: 28%, 45%;
+    min-height: none;
+    padding-top: 120px;
+  }
+}
+.uxplusIntro img {
+  padding-left: 60px;
+  max-width: 410px;
+}
+@media (min-width: 720px) {
+  .uxplusIntro img {
+    padding-left: 85px;
+    max-width: 490px;
+  }
+}
+.uxplusIntro h1 {
+  color: #d56b39;
+  font-size: 1em;
+  text-transform: uppercase;
+}
+.uxplusIntro p {
+  font-size: 1em;
+  line-height: 1.7em;
+}
+@media (min-width: 720px) {
+  .uxplusIntro p {
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 .fontColor-red-default {
   color: #d56b39;
@@ -168,6 +237,21 @@ a {
   -ms-flex-align: center;
   align-items: center;
 }
+.fontSize-small {
+  font-size: 0.8em;
+}
+.fontSize-normal {
+  font-size: 1em;
+}
+.fontSize-medium {
+  font-size: 1.2em;
+}
+.fontSize-large {
+  font-size: 1.6em;
+}
+.fontSize-xlarge {
+  font-size: 2em;
+}
 .padding-xxsmall {
   padding: 4px;
 }
@@ -191,6 +275,9 @@ a {
 }
 .padding-xxlarge {
   padding: 60px;
+}
+.padding-xxxlarge {
+  padding: 120px;
 }
 .paddingTop-xxsmall {
   padding-top: 4px;
@@ -216,6 +303,9 @@ a {
 .paddingTop-xxlarge {
   padding-top: 60px;
 }
+.paddingTop-xxxlarge {
+  padding-top: 120px;
+}
 .paddingRight-xxsmall {
   padding-right: 4px;
 }
@@ -239,6 +329,9 @@ a {
 }
 .paddingRight-xxlarge {
   padding-right: 60px;
+}
+.paddingRight-xxxlarge {
+  padding-right: 120px;
 }
 .paddingBottom-xxsmall {
   padding-bottom: 4px;
@@ -264,6 +357,9 @@ a {
 .paddingBottom-xxlarge {
   padding-bottom: 60px;
 }
+.paddingBottom-xxxlarge {
+  padding-bottom: 120px;
+}
 .paddingLeft-xxsmall {
   padding-left: 4px;
 }
@@ -287,6 +383,9 @@ a {
 }
 .paddingLeft-xxlarge {
   padding-left: 60px;
+}
+.paddingLeft-xxxlarge {
+  padding-left: 120px;
 }
 .margin-xxsmall {
   margin: 4px;
@@ -312,6 +411,9 @@ a {
 .margin-xxlarge {
   margin: 60px;
 }
+.margin-xxxlarge {
+  margin: 120px;
+}
 .marginTop-xxsmall {
   margin-top: 4px;
 }
@@ -335,6 +437,9 @@ a {
 }
 .marginTop-xxlarge {
   margin-top: 60px;
+}
+.marginTop-xxxlarge {
+  margin-top: 120px;
 }
 .marginRight-xxsmall {
   margin-right: 4px;
@@ -360,6 +465,9 @@ a {
 .marginRight-xxlarge {
   margin-right: 60px;
 }
+.marginRight-xxxlarge {
+  margin-right: 120px;
+}
 .marginBottom-xxsmall {
   margin-bottom: 4px;
 }
@@ -384,6 +492,9 @@ a {
 .marginBottom-xxlarge {
   margin-bottom: 60px;
 }
+.marginBottom-xxxlarge {
+  margin-bottom: 120px;
+}
 .marginLeft-xxsmall {
   margin-left: 4px;
 }
@@ -407,4 +518,7 @@ a {
 }
 .marginLeft-xxlarge {
   margin-left: 60px;
+}
+.marginLeft-xxxlarge {
+  margin-left: 120px;
 }
