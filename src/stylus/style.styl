@@ -51,10 +51,20 @@ displays = {
   block         : block
 }
 
+text-alignments = {
+  center : center,
+  right : right
+}
+
 flex-props = {
   start   : flex-start,
   end     : flex-end,
   center  : center
+}
+
+flex-directions = {
+  row    : row,
+  column : column
 }
 
 fonts = {
@@ -86,6 +96,11 @@ fonts = {
   font-style normal
 
 // Functions
+
+forMobileOnly()
+  @media (max-width: containers[mobile-max])  
+    {block}
+    
 forTablet()
   @media (min-width: containers[mobile-max])  
     {block}
@@ -99,8 +114,16 @@ createUtilityClasses(targetHash, className, property)
   for key, value in targetHash
     .{className}-{key}
       {property} value
+      
+      &-mobileOnly
+        +forMobileOnly()
+          {property} value
+      
+      &-fromTablet
+        +forTablet()
+          {property} value
     
-
+  
 
 // Resets & Foundation
 html, body
@@ -115,7 +138,13 @@ html, body
   color colors[uxblack];
   font-family 'MGBook', Helvetica, sans-serif
   font-size 18px
-  letter-spacing 0.02em
+  
+  letter-spacing 0.005em
+  margin 0
+  padding 0
+
+
+h1, h2, h3, h4, h5, h6, p
   margin 0
   padding 0
   
@@ -128,6 +157,9 @@ strong
 * 
   box-sizing border-box
   
+img 
+  max-width 100%
+  
 // Typography
 
 
@@ -137,14 +169,26 @@ strong
 .boundary
   margin 0 auto
   max-width containers[mobile-max];
-  
+  padding-left spaces[medium];
+  padding-right spaces[medium];
+
   +forTablet()
     max-width containers[tablet-max];
+    padding-left spaces[large];
+    padding-right spaces[large];
     
   +forDesktop()
     max-width containers[desktop-max];
     
- 
+  h3, h4, h5
+    font-family 'MGBlack', Helvetica, sans-serif  
+  
+  h3
+    font-size font-sizes[large];
+  h4
+    font-size font-sizes[medium];
+    
+
 
 // Navigation
 .navigation
@@ -182,6 +226,8 @@ strong
   background-color colors[blue-default];
   border-radius radius[default];
   color colors[uxwhite];
+  cursor pointer
+  display inline-block
   font-family fonts[bold];
   padding-top spaces[small];
   padding-bottom spaces[small];
@@ -204,6 +250,13 @@ strong
     padding-bottom spaces[medium];
     padding-left spaces[large];
     padding-right spaces[large];
+    
+  &.ghost 
+    background transparent
+    box-shadow 0 0 0 3px inset colors[blue-default];
+    
+    &:hover
+      background colors[blue-default]
 
 
 // Sections
@@ -214,8 +267,8 @@ strong
   min-height 90vh
   text-align center
   transition background-size 450ms
-  padding-left spaces[large];
-  padding-right spaces[large];
+  //padding-left spaces[large];
+  //padding-right spaces[large];
   padding-top spaces[xxlarge];
   padding-bottom spaces[xxlarge];
   width 100%
@@ -227,10 +280,11 @@ strong
     padding-top spaces[xxxlarge];
   
   img 
-    padding-left spaces[xxlarge];
-    max-width 410px
+    padding-left spaces[normal];
+    max-width 220px
     
     +forTablet()
+      padding-left spaces[large];
       padding-left 85px
       max-width 490px
 
@@ -247,11 +301,133 @@ strong
       max-width 500px
       margin-left auto
       margin-right auto
+
+.uxplusOrganizers
+  .boundary 
+    align-items center
+    justify-content center
+    display flex
+    flex-direction column
+      
+    +forTablet()
+      flex-direction row
+
+  h2
+    font-size font-sizes[small];
+    font-family 'MGBold', Helvetica, sans-serif
+    text-transform uppercase
+  
+  img.graphika
+    max-height 45px  
     
+  img._8020
+    max-height 35px
+
+
+.uxplusSpeakers
+  
+  .speakers
+    display grid
+    grid-template-columns 45% 45%
+    grid-column-gap spaces[large];
+    grid-row-gap spaces[medium];
+    justify-content center
+    
+    &.firstSix
+      margin-bottom spaces[medium];
+
+    +forDesktop()
+      
+      &.firstSix
+        grid-template-columns 30% 30% 30%
+        grid-column-gap 5.16%;
+        grid-row-gap spaces[large];
+        margin-bottom spaces[large];
+        
+      &.lastFour
+        grid-template-columns 30% 30%
+        grid-column-gap 5.16%;
+        grid-row-gap spaces[large];
     
 
+  .speaker
+    text-align center
+    text-decoration none
+    position relative
+    top 0
+    
+  
+    img 
+      padding spaces[normal];
+    p
+      font-size font-sizes[small];
+      +forDesktop()
+        font-size font-sizes[normal];
+        
+    &:hover 
+      top -16px
+    
+.uxplusEventDetails
+  .venue
+    img
+      max-height 240px
+      
+    .description
+      text-align center 
+      
+      +forTablet()
+        text-align left
+      
+  .details
+    text-align center
+    
+    +forTablet()
+      margin-top 200px
+      margin-bottom 200px
+      max-width 490px
 
 
+.uxplusFAQ
+  
+  
+  .questions
+    p 
+      font-family 'MGBold', Helvetica, sans-serif
+      
+    +forTablet()
+      display flex
+  
+  .question
+    
+    +forMobileOnly()
+      margin-bottom spaces[large]
+    
+    +forTablet()
+      flex 1
+      flex-basis 100%
+
+// Font color settings for different backgrounds
+.bgColor-blue-pale
+  color colors[uxwhite];
+
+.bgColor-blue-default
+  color colors[blue-pale];
+  
+  h3, h4
+    color colors[uxwhite];
+
+.bgColor-red-default
+  h3, h4
+    color colors[uxwhite];
+  p 
+    color colors[red-pale];
+
+.bgColor-uxblack
+  h3, h4
+    color colors[uxwhite]
+    
+  p
+    color colors[red-pale];
 
 
 
@@ -264,14 +440,18 @@ strong
 
 // - Colors
 createUtilityClasses(colors, fontColor, color)
+createUtilityClasses(colors, bgColor, background-color)
 
 // - Box
 createUtilityClasses(displays, display, display)
 createUtilityClasses(flex-props, justifyContent, justify-content)
 createUtilityClasses(flex-props, alignItems, align-items)
+createUtilityClasses(flex-directions, flexDirection, flex-direction)
 
 // - Type 
 createUtilityClasses(font-sizes, fontSize, font-size)
+createUtilityClasses(fonts, fontWeight, font-family)
+createUtilityClasses(text-alignments, textAlign, text-align)
 
 // - Padding
 createUtilityClasses(spaces, padding, padding)
